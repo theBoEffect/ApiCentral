@@ -7,41 +7,85 @@ info:
     url: https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png
 tags:
   - name: System
-    description: Basic System Functionality
+    description: Basic system functionality
+  - name: Specs
+    description: Schema Registration and Crud
+  - name: Settings
+    description: Single tenant settings for the portal
 paths:
-  /logs:
+  /settings:
+    put:
+      tags:
+        - Settings
+      summary: Define your portal settings
+      description: Define your portal settings
+      responses:
+        '201':
+          description: successful creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/settingObject'
+        '200':
+          description: successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/settingObject'
+        '400':
+          description: Invalid input
+      security:
+        - Bearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putSettingObject'
+        description: Settings data to be written or updated
+        required: true
+    get:
+      tags:
+        - Settings
+      summary: Retrieve all portal settings
+      description: Retrieve all portal settings. Remember this is a single tenant.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/settingObject'
+      security:
+        - Bearer: []
+  /schema:
     post:
       tags:
-        - System
-      summary: Write a new log to the console and the db
-      description: This is unlikely to be used with frequency.
-      operationId: writeLog
+        - Specs
+      summary: Add a new specification to be shown on the portal
+      description: Add a new specification to be shown on the portal
       responses:
         '201':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/oneLog'
-        '405':
-          description: Invalid input
-        '500':
-          description: Unknown error
+                $ref: '#/components/schemas/schemaObjects'
+        '400':
+          description: Invalid request
       security:
-        - UEAuth: []
+        - Bearer: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/writeLog'
-        description: Log data to be written
+              $ref: '#/components/schemas/writeSchemaObject'
+        description: Schema data to be written
         required: true
     get:
       tags:
-        - System
-      summary: Retrieve all logs in the system
-      description: 'Uses oData filtering to retrieve logs. You will need to use oData syntax.'
-      operationId: getLogs
+        - Specs
+      summary: Retrieve all openApi specs to be shown
+      description: Retrieve all openApi specs to be shown
       parameters:
         - name: $filter
           in: query
@@ -79,20 +123,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Logs'
+                $ref: '#/components/schemas/schemaObjects'
       security:
-        - UEAuth: []
-  '/logs/{id}':
+        - Bearer: []
+  '/schema/{id}':
     get:
       tags:
-        - System
-      summary: Find a log with its ID
-      description: 'Codes should be "error", "notify", or "success".'
-      operationId: getLog
+        - Specs
+      summary: Find a schema with its ID
+      description: Find a schema with its ID
       parameters:
         - name: id
           in: path
-          description: id of log type to return
+          description: id of openApi schema to return
           required: true
           schema:
             type: string
@@ -102,46 +145,68 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/oneLog'
+                $ref: '#/components/schemas/schemaObject'
         '400':
-          description: Invalid code supplied
+          description: Invalid request
         '404':
-          description: Log not found
+          description: Not found
       security:
-        - UEAuth: []
+        - Bearer: []
     patch:
       tags:
-        - System
-      summary: Patch an existing Log
-      description: Patch an existing Log - This is not a normal action for logs, used here as an example of JSON Patch only.
-      operationId: patchLog
+        - Specs
+      summary: Patch an existing Schema definition
+      description: Patch an existing Schema definition
       parameters:
         - name: id
           in: path
-          description: id of log type to update
+          description: id of the schema to update
           required: true
           schema:
             type: string
       responses:
-        '201':
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/oneLog'
-        '405':
-          description: Invalid input
-        '500':
-          description: Unknown error
+                $ref: '#/components/schemas/schemaObject'
+        '400':
+          description: Invalid request
       security:
-        - UEAuth: []
+        - Bearer: []
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/jsonPatch'
-        description: JSON Patch specific to your log object
+        description: JSON Patch specific to your object
         required: true
+    delete:
+      tags:
+        - Specs
+      summary: Delete a schema with its ID
+      description: Delete a schema with its ID
+      parameters:
+        - name: id
+          in: path
+          description: id of openApi schema to remove
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schemaObject'
+        '400':
+          description: Invalid request
+        '404':
+          description: Not found
+      security:
+        - Bearer: []
   /health:
     get:
       tags:
@@ -155,14 +220,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/success'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/defaultError'
         '500':
-          description: Internal server error
+          description: Unauthorized
           content:
             application/json:
               schema:
@@ -172,11 +231,10 @@ servers:
   - url: http://localhost:3000/api
 components:
   securitySchemes:
-    UEAuth:
+    Bearer:
       type: http
       scheme: bearer
-      name: Authorization
-      description: 'For both UEAuth and other Bearer based tokens, simply enter the token (prefixing with "bearer" is not required).'
+      description: 'Simply enter the token (prefixing with "bearer" is not required).'
     basicAuth:
       type: http
       scheme: basic
@@ -203,6 +261,7 @@ components:
           type: string
         message:
           type: object
+
     defaultError:
       required:
         - err
@@ -213,48 +272,107 @@ components:
           format: int32
         message:
           type: string
-    Log:
+
+    settingObject:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/putSettingObject'
       properties:
         id:
           type: string
-          description: guid for this log
-        logTimestamp:
+          description: guid value... this is a place holder in case we ever want to go mult-tenant. It is currently meaningless.
+        created:
           type: string
           format: date-time
-          description: This is your rangeKey. This is a timestamp.
-      allOf:
-        - $ref: '#/components/schemas/writeLog'
-    writeLog:
+        modified:
+          type: string
+          format: date-time
+
+    putSettingObject:
       type: object
+      additionalProperties: false
       required:
-        - message
+        - company
       properties:
-        code:
+        company:
           type: string
-          enum: ["ERROR", "SUCCESS", "NOTIFY", "LOG"]
-        message:
+          description: The name of the company or organization using the portal
+        title:
           type: string
-          description: This should be any brief summary data in string format.
-        details:
-          type: object
-          description: You can directly pipe any error message objects to here.
-    oneLog:
-      properties:
-        type:
+          description: The html title for the portal
+        statement:
           type: string
-          default: Log
-        data:
-          $ref: '#/components/schemas/Log'
-    Logs:
-      properties:
-        type:
+          description: The additional brief statement coupled with the logo or company name. Usually 2 or 3 words.
+        logoUrl:
           type: string
-          default: Log
-        data:
+          description: URL of the logo hosted externally
+        bannerTitle:
+          type: string
+          description: Header title on the portal banner
+        bannerStatement:
+          type: string
+          description: Header statement under the header title on the portal banner
+        bannerImage:
+          type: string
+          description: Banner image URL hosted externally
+        infoBlocks:
           type: array
           items:
-            $ref: '#/components/schemas/Log'
+            type: object
+            properties:
+              image:
+                type: string
+                description: the thumbnail image that goes with the info block (a default will be selected)
+              title:
+                type: string
+                description: the title of an info block
+              body:
+                type: string
+                description: the body of an info block
+
+    schemaObjects:
+      type: array
+      items:
+        $ref: '#/components/schemas/schemaObject'
+
+    schemaObject:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/writeSchemaObject'
+      properties:
+        id:
+          type: string
+          description: A guid that represents this specific schema pointer
+        created:
+          type: string
+          format: date-time
+          description: creation time of this record
+        modified:
+          type: string
+          format: date-time
+          description: when this was modified last
+
+    writeSchemaObject:
+      type: object
+      required:
+        - apiSpecJsonUri
+        - displayTitle
+        - displayDescription
+      properties:
+        apiSpecJsonUri:
+          type: string
+          description: the url of the served openapi/swagger JSON (not the swagger UI)
+        swaggerUiUrl:
+          type: string
+          description: the url of the swagger UI hosted if available
+        displayTitle:
+          type: string
+          description: the title to display on the portal main page
+        displayDescription:
+          type: string
+          description: the description to display on the portal main page
+
+
     jsonPatch:
       additionalProperties: false
       description: Details for JSONPatch can be found at http://jsonpatch.com/

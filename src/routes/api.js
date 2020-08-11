@@ -1,5 +1,6 @@
 import express from 'express';
 import log from '../api/logging/api';
+import settings from '../api/settings/api';
 import m from '../middleware';
 const router = express.Router();
 const p = require('../../package.json');
@@ -11,7 +12,8 @@ router.get('/version', (req, res) => {
             api: p.name,
             version: p.version,
             baseURL: '/api',
-            copyright: `Copyright (c) ${date.getFullYear()} theBoEffect LLC`
+            copyright: `Copyright (c) ${date.getFullYear()} ${p.author}`,
+            license: p.license
         }
     });
 });
@@ -26,4 +28,20 @@ router.get('/health', (req, res) => {
     res.json({data: {server: 'running'}});
 });
 
+// todo auth and schema check
+// Settings
+
+router.put('/settings', settings.setSettings);
+router.get('/settings', settings.getSettings);
+
+/*
+// Specs
+
+router.post('/schema', schema.writeSchema);
+router.get('/schema', schema.getSchemas);
+router.get('/schema/:id', schema.getSchema);
+router.patch('/schema/:id', schema.patchSchema);
+router.delete('/schema/:id', schema.deleteSchema);
+
+*/
 module.exports = router;

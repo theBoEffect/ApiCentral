@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-service",
+  "name": "OpenApiDevPortal",
   "version": "1.0.0",
-  "description": "A microservice boilerplate that runs optionally as docker or lambda",
+  "description": "An easy way to aggregate swagger specs into a dev portal.",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -17,10 +17,9 @@
     "docker",
     "lambda",
     "service",
-    "microservice",
-    "boilerplate"
+    "microservice"
   ],
-  "author": "theBoEffect",
+  "author": "theBoEffect LLC",
   "url": "https://theboeffect.com",
   "logo": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png",
   "dependencies": {

@@ -16,8 +16,13 @@ export default {
         next(handleErrors.catch404());
     },
     async catchErrors (err, req, res, next) {
-        const error = await handleErrors.parse(err);
-        return res.respond(error);
+        try {
+            const error = await handleErrors.parse(err);
+            return res.respond(error);
+        } catch (e) {
+            return res.status(500).json({ message: e.message });
+        }
+
     },
     responseIntercept: sayMiddleware.responseIntercept,
     async schemaCheck(req, res, next) {
