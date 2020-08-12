@@ -33,6 +33,19 @@ If you'd rather use a different database or ODM, the following modifications are
 * http://localhost:3000
 * Go to http://localhost:3000/api for API documentation
 
+## Site MetaData
+
+To set html metadata for robots, social media, etc., you must set the values before deployment at ./metaData.json
+
+```
+{
+  "title": "Home - Developer Portal",
+  "url": "http://localhost:3000",
+  "site_name": "Developer Portal",
+  "image": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
+}
+```
+
 ## TODO
 
 * UI
