@@ -20,12 +20,6 @@ paths:
       summary: Define your portal settings
       description: Define your portal settings
       responses:
-        '201':
-          description: successful creation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/settingObject'
         '200':
           description: successful update
           content:
@@ -357,7 +351,6 @@ components:
       required:
         - apiSpecJsonUri
         - displayTitle
-        - displayDescription
       properties:
         apiSpecJsonUri:
           type: string
