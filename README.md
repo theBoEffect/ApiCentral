@@ -34,7 +34,7 @@ If you'd rather use a different database or ODM, the following modifications are
 
 ## TODO
 
-* Validate URLs when submitted before returning 200
+* UI
 * Unit tests for settings
 * Unit tests for specs
-* UI
+

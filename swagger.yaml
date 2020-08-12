@@ -66,6 +66,8 @@ paths:
                 $ref: '#/components/schemas/schemaObjects'
         '400':
           description: Invalid request
+        '417':
+          description: Expectation failed - invalid openApi URL
       security:
         - Bearer: []
       requestBody:

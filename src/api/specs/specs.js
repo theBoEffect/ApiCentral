@@ -1,9 +1,28 @@
 import jsonPatch from 'jsonpatch';
+import axios from 'axios';
+import Boom from '@hapi/boom';
 import dal from './dal';
 import helper from '../../helper';
 
 export default {
     async writeSpec(data) {
+        try {
+            const check = await axios.get(data.apiSpecJsonUri);
+            if (!check.data) throw 0;
+            if (!check.data.openapi) throw 0;
+        } catch (error) {
+            throw Boom.expectationFailed('the OpenAPI URI did not point to a valid OpenAPI specification');
+        }
+
+        if (data.swaggerUiUrl) {
+            try {
+                const check = await axios.get(data.swaggerUiUrl);
+                if (!check.data) throw 0;
+            } catch (error) {
+                throw Boom.expectationFailed('the swagger UI link did not load as expected');
+            }
+        }
+
         return dal.writeSpec(data);
     },
 

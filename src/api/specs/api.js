@@ -7,6 +7,7 @@ const RESOURCE = 'OPEN API RECORD';
 const api = {
     async writeSpec(req, res, next) {
         try {
+            if(!req.body.apiSpecJsonUri) throw Boom.badRequest('apiSpecJsonUri is required');
             const result = await specs.writeSpec(req.body);
             return res.respond(say.created(result, RESOURCE));
         } catch (error) {
