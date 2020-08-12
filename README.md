@@ -29,6 +29,8 @@ If you'd rather use a different database or ODM, the following modifications are
 * yarn
 * yarn test
 * yarn run dev
+* Go to http://localhost:3000/api for documentation
+* Also http://localhost:3000/swagger
 
 ## TODO
 
