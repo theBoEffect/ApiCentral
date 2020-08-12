@@ -132,7 +132,7 @@ describe('Swagger / OpenAPI parser test', () => {
 });
 
 describe('Helper tests', () => {
-    test('isJson returns true when a string is passed that is infact valid JSON', async () => {
+    test('isJson returns true when a string is passed that is in fact valid JSON', async () => {
         try {
             const valid = helper.isJson(JSON.stringify({ test: 'ok' }));
             expect(valid).toBe(true);

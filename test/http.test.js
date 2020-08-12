@@ -64,7 +64,8 @@ describe('API tests', () => {
                     api: pJson.name,
                     version: pJson.version,
                     baseURL: '/api',
-                    copyright: `Copyright (c) ${date.getFullYear()} theBoEffect LLC`
+                    copyright: `Copyright (c) ${date.getFullYear()} ${pJson.author}`,
+                    license: pJson.license
                 }
             });
         } catch (error) {
