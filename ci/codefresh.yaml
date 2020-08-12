@@ -18,4 +18,5 @@ steps:
     working_directory: "${{clone}}"
     commands:
       - yarn
+      - yarn run build-ui
       - yarn test
