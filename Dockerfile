@@ -5,6 +5,7 @@ RUN mkdir /app
 COPY . /app
 WORKDIR /app
 RUN yarn --production
+RUN yarn run build-ui
 
 EXPOSE 3000
 

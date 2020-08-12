@@ -8,9 +8,10 @@
     "start": "node ./src/start.js",
     "dev": "NODE_ENV=dev nodemon ./src/start.js",
     "dist": "nodemon ./dist/start.js",
-    "build": "yarn && babel src -d dist",
-    "package": "yarn && babel src -d dist && sls package",
-    "deploy": "yarn && babel src -d dist && sls deploy",
+    "build-ui": "pushd ./portal && yarn && yarn build && popd",
+    "build": "pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist",
+    "package": "pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls package",
+    "deploy": "pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls deploy",
     "test": "jest"
   },
   "keywords": [

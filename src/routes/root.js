@@ -1,11 +1,14 @@
 import express from 'express';
 import swagger from '../swagger';
+import path from 'path';
 
 const router = express.Router();
 const config = require('../config');
 const pJson = require('../../package.json');
 
-router.get('/', (req, res) => {
+router.use('/', express.static(path.join(__dirname, '../../public/portal')));
+
+router.get('/app', (req, res) => {
     res.render('index', { title: pJson.name, description: pJson.description, by: pJson.author, url: pJson.url  })
 });
 

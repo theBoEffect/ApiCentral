@@ -28,9 +28,10 @@ If you'd rather use a different database or ODM, the following modifications are
 * Clone the project
 * yarn
 * yarn test
+* yarn run build-ui
 * yarn run dev
-* Go to http://localhost:3000/api for documentation
-* Also http://localhost:3000/swagger
+* http://localhost:3000
+* Go to http://localhost:3000/api for API documentation
 
 ## TODO
 
