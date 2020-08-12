@@ -19,6 +19,7 @@ provider:
 package:
   exclude:
     - src/**
+    - portal/**
 
 plugins:
  - serverless-domain-manager
