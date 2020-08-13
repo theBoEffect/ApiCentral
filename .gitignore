@@ -44,3 +44,4 @@ dist/
 node_modules/
 public/portal/
 *.icloud
+theme/

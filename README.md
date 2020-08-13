@@ -52,3 +52,8 @@ To set html metadata for robots, social media, etc., you must set the values bef
 * Unit tests for settings
 * Unit tests for specs
 
+## Credits
+
+* [now-ui-kit by creativetimoffical](https://github.com/creativetimofficial/now-ui-kit)
+
+
