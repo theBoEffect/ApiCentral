@@ -1,0 +1,67 @@
+<div class="page-header page-header-small">
+  <div class="page-header-image" data-parallax="true" style="background-image: url('{{settings.bannerImage}}');">
+  </div>
+  <div class="content-center">
+    <div class="container">
+      <h1 class="title">{{settings.bannerTitle}}</h1>
+      <h4 class="title">{{settings.bannerStatement}}</h4>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let card of settings.infoBlocks" class="col-md-4">
+        <div class="card">
+          <img src="{{card.image}}" class="card-img-top" alt="info image">
+          <div class="card-body">
+            <h5 class="card-title">{{card.title}}</h5>
+            <p class="card-text">{{card.body}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section section-about-us" id="about">
+  <div class="container">
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{settings.aboutCompanyImage}}" class="card-img" alt="about company image" style="min-height: 100%;min-width: 100%;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{settings.aboutCompanyTitle}}</h5>
+            <p class="card-text">{{settings.aboutCompany}}</p>
+            <a href="{{settings.aboutCompanyUrl}}" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section section-contact-us text-center" id="contact">
+  <div class="container">
+    <h2 class="title">Want to work with us?</h2>
+    <p class="description">Your project is very important to us.</p>
+    <form action="https://formspree.io/{{settings.formspree}}" method="POST">
+      <div class="input-group input-lg">
+        <div class="input-group-prepend">
+                <span style="padding: 10px" class="input-group-text">
+                  <i class="now-ui-icons ui-1_email-85"></i>
+                </span>
+        </div>
+        <input style="width: auto" type="text" class="form-control" name="_replyto" placeholder="Email...">
+      </div>
+
+      <div class="textarea-container">
+        <textarea class="form-control" name="message" rows="4" cols="80" placeholder="Type a message..."></textarea>
+      </div>
+      <!-- your other form fields go here -->
+      <div class="send-button">
+        <button class="btn btn-primary btn-round btn-block btn-lg" type="submit">Send A Message</button>
+      </div>
+    </form>
+  </div>
+</div>
