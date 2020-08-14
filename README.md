@@ -25,7 +25,7 @@ If you'd rather use a different database or ODM, the following modifications are
 
 ## Site Settings
 
-Since this is a single tenant solution (one instance per orgnaization requiring a portal), settings such as the company name, logo, and html meta data are defined in a static json file at the root of the project (./settings.json). The UI is a complete SPA unto itself under the portal directory and has its own default copy of this called siteSettings.json. When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately.
+Since this is a single tenant solution (one instance per organization requiring a portal), settings such as the company name, logo, and html meta data are defined in a static json file at the root of the project (./settings.json). The UI is a complete SPA unto itself under the portal directory and has its own default copy of this called siteSettings.json. When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately.
 
 ```
 {
