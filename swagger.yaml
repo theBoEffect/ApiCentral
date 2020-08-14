@@ -14,29 +14,6 @@ tags:
     description: Single tenant settings for the portal
 paths:
   /settings:
-    put:
-      tags:
-        - Settings
-      summary: Define your portal settings
-      description: Define your portal settings
-      responses:
-        '200':
-          description: successful update
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/settingObject'
-        '400':
-          description: Invalid input
-      security:
-        - Bearer: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/putSettingObject'
-        description: Settings data to be written or updated
-        required: true
     get:
       tags:
         - Settings

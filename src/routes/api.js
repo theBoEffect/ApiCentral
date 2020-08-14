@@ -26,8 +26,6 @@ router.get('/health', (req, res) => {
 
 // todo auth and schema check
 // Settings
-
-router.put('/settings', [m.schemaCheck], settings.setSettings);
 router.get('/settings', settings.getSettings);
 
 // Specs

@@ -2,14 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import * as md from '../../../metaData.json';
+import * as siteSettings from '../../siteSettings.json';
 
 export const environment = {
   production: false,
   baseUrl: '/',
   swagger: '/swagger',
   reDoc: '/api',
-  md
+  siteSettings
 };
 
 /*

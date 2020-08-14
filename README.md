@@ -23,9 +23,38 @@ If you'd rather use a different database or ODM, the following modifications are
 * validate that slsapp and start both correctly implement connection.js
 * in each of your api/resources, change the dal.js file to access the new DB using the new ODM/ORM
 
+## Site Settings
+
+Since this is a single tenant solution (one instance per orgnaization requiring a portal), settings such as the company name, logo, and html meta data are defined in a static json file at the root of the project (./settings.json). The UI is a complete SPA unto itself under the portal directory and has its own default copy of this called siteSettings.json. When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately.
+
+```
+{
+  "company": "theBoEffect LLC",
+  "title": "theBoEffect Developer Portal",
+  "statement": "Lets Build Something",
+  "logoUrl": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png",
+  "bannerTitle": "API Central",
+  "bannerStatement": "A place for developers to find what they need.",
+  "bannerImage": "",
+  "infoBlocks": [
+    {
+      "image": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png",
+      "title": "EXAMPLE",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    }
+  ],
+  "metaData": {
+    "siteUrl": "http://localhost:3000",
+    "siteName": "Developer Portal",
+    "image": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
+  }
+}
+```
+
 ## Instruction
 
 * Clone the project
+* Update ./settings.json with your site settings
 * yarn
 * yarn test
 * yarn run build-ui
@@ -43,22 +72,8 @@ The UI its own embedded SPA project that simply builds to the parent public fold
 
 From here all the normal angular commands would apply (i.e. ng). When you're ready you can do an "ng build" from this directory or go to the parent directory and do a "yarn build". This will trigger the appropriate angular static files to be added to the ./public folder of the main project where they will be served along with the service API at localhost:3000.
 
-## Site MetaData
-
-To set html metadata for robots, social media, etc., you must set the values before deployment at ./metaData.json
-
-```
-{
-  "title": "Home - Developer Portal",
-  "url": "http://localhost:3000",
-  "site_name": "Developer Portal",
-  "image": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
-}
-```
-
 ## TODO
 
-* Change settings to a static file and include site metadata
 * UI
 * Unit tests for settings
 * Unit tests for specs

@@ -8,11 +8,11 @@
     "start": "node ./src/start.js",
     "dev": "NODE_ENV=dev nodemon ./src/start.js",
     "dist": "nodemon ./dist/start.js",
-    "build-ui": "pushd ./portal && yarn && yarn build && popd",
-    "test-ui": "pushd ./portal && yarn test && popd",
-    "build": "pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist",
-    "package": "pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls package",
-    "deploy": "pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls deploy",
+    "build-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd",
+    "test-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn test && popd",
+    "build": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist",
+    "package": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls package",
+    "deploy": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls deploy",
     "test": "jest"
   },
   "keywords": [
