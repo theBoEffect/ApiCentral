@@ -3,13 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 import * as siteSettings from '../../siteSettings.json';
-
+const setting: any = siteSettings;
 export const environment = {
   production: false,
   baseUrl: '/',
   swagger: '/swagger',
   reDoc: '/api',
-  siteSettings
+  setting: setting.default
 };
 
 /*

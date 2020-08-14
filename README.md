@@ -74,8 +74,7 @@ From here all the normal angular commands would apply (i.e. ng). When you're rea
 
 ## TODO
 
-* UI
-* Unit tests for settings
+* UI ReDoc Page
 * Unit tests for specs
 
 ## Credits
