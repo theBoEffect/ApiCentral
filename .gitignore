@@ -45,3 +45,4 @@ node_modules/
 public/portal/
 *.icloud
 theme/
+settings.json

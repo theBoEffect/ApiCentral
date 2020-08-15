@@ -25,7 +25,7 @@ If you'd rather use a different database or ODM, the following modifications are
 
 ## Site Settings
 
-Since this is a single tenant solution (one instance per organization requiring a portal), settings such as the company name, logo, and html meta data are defined in a static json file at the root of the project (./settings.json). The UI is a complete SPA unto itself under the portal directory and has its own default copy of this called siteSettings.json. When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately.
+Since this is a single tenant solution (one instance per organization requiring a portal), settings such as the company name, logo, and html meta data are defined in a static json file at the root of the project (./settings.json). This file is generated when you run "yarn run settings" from ./settings-default.json'. The UI is a complete SPA unto itself under the portal directory and expects its own default copy of this file, which is also created when you run "yarn run settings". When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately. These files are ignored by git so you can make your customizations easily.
 
 ```
 {
@@ -83,12 +83,14 @@ Since this is a single tenant solution (one instance per organization requiring 
 }
 ```
 
-## Instruction
+## Local Build Instruction
 
 * Clone the project
+* yarn run settings
 * Update ./settings.json with your site settings
 * yarn
 * yarn test
+* yarn run test-ui
 * yarn run build-ui
 * yarn run dev
 * http://localhost:3000
@@ -109,12 +111,16 @@ From here all the normal angular commands would apply (i.e. ng). When you're rea
 
 ## TODO
 
-* use yarn redoc for dependency mapping and unit tests
 * UI Wire Up
 * Unit tests for specs
+* Auth?
+* Update approach to settings
 
 ## Credits
 
 * [now-ui-kit by creativetimoffical](https://github.com/creativetimofficial/now-ui-kit)
+* [ReDoc](https://github.com/Redocly/redoc)
+* [Formspree](https://formspree.io/)
+
 
 
