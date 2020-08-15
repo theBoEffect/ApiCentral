@@ -20,3 +20,4 @@ steps:
       - yarn
       - yarn run build-ui
       - yarn test
+      - yarn run test-ui
