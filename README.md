@@ -99,14 +99,18 @@ Since this is a single tenant solution (one instance per organization requiring 
 The UI its own embedded SPA project that simply builds to the parent public folder. This way it can easily be worked on separately or pulled out entirely. It is an angular 10 project under the /portal file. To develop or modify the UI do the following:
 
 * Clone the project
+* yarn run settings
 * cd portal/
+* yarn
+* yarn test
 * yarn start
 
 From here all the normal angular commands would apply (i.e. ng). When you're ready you can do an "ng build" from this directory or go to the parent directory and do a "yarn build". This will trigger the appropriate angular static files to be added to the ./public folder of the main project where they will be served along with the service API at localhost:3000.
 
 ## TODO
 
-* UI ReDoc Page
+* use yarn redoc for dependency mapping and unit tests
+* UI Wire Up
 * Unit tests for specs
 
 ## Credits
