@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApisComponent } from './apis/apis.component';
 import { LandingComponent } from './landing/landing.component';
 import { ApiPageComponent } from './api-page/api-page.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ApiPageComponent } from './api-page/api-page.component';
     AppComponent,
     ApisComponent,
     LandingComponent,
-    ApiPageComponent
+    ApiPageComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
