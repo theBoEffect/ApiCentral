@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,9 @@ export class AppComponent {
   public title:string = environment.setting.title;
   public year:string = (new Date()).getFullYear().toString();
   constructor(
-
+    private titleService: Title
   ) {
-
-    console.info(environment.setting);
-
+    this.titleService.setTitle(this.title);
   }
 }
 
