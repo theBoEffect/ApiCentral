@@ -8,7 +8,7 @@
     "start": "node ./src/start.js",
     "dev": "NODE_ENV=dev nodemon ./src/start.js",
     "dist": "nodemon ./dist/start.js",
-    "settigs": "node ./addSettingsToPortal.js",
+    "settings": "node ./addSettingsToPortal.js",
     "build-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd",
     "test-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn test && popd",
     "build": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist",
