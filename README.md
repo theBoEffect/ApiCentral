@@ -90,8 +90,8 @@ Since this is a single tenant solution (one instance per organization requiring 
 * yarn run settings
 * Update ./settings.json with your site settings
 * yarn
-* yarn test
-* yarn run test-ui
+* yarn test (optional)
+* yarn run test-ui (optional)
 * yarn run build-ui
 * yarn run dev
 * http://localhost:3000
@@ -109,7 +109,7 @@ The UI its own embedded SPA project that simply builds to the parent public fold
 * yarn run settings
 * cd portal/
 * yarn
-* yarn test
+* yarn test (optional)
 * yarn start
 
 From here all the normal angular commands would apply (i.e. ng). When you're ready you can do an "ng build" from this directory or go to the parent directory and do a "yarn build". This will trigger the appropriate angular static files to be added to the ./public folder of the main project where they will be served along with the service API at localhost:3000.
