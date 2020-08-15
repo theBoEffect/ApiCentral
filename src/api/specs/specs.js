@@ -41,6 +41,7 @@ export default {
 
     async patchSpec(id, update) {
         const spec = await dal.getSpec(id);
+        if(!spec) throw Boom.notFound(`failed to fetch ${id}`);
         const patched = jsonPatch.apply_patch(JSON.parse(JSON.stringify(spec)), update);
         return dal.patchSpec(id, patched);
     }

@@ -1,8 +1,22 @@
-
 .infoBlock {
   width: 18rem;
   text-align: center;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+}
+a.nada:link {
+  text-decoration: none;
+}
+
+a.nada:visited {
+  text-decoration: none;
+}
+
+a.nada:active {
+  text-decoration: none;
+}
+
+div.card-body.dim:hover {
+  background-color: whitesmoke;
 }

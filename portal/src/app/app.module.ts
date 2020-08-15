@@ -9,6 +9,8 @@ import { ApisComponent } from './apis/apis.component';
 import { LandingComponent } from './landing/landing.component';
 import { ApiPageComponent } from './api-page/api-page.component';
 import { AdminComponent } from './admin/admin.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SchemasService} from "./providers/schemas.service";
 
 
 @NgModule({
@@ -21,11 +23,14 @@ import { AdminComponent } from './admin/admin.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    SchemasService
+  ],
   bootstrap: [AppComponent],
   schemas:[NO_ERRORS_SCHEMA]
 })

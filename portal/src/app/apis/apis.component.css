@@ -1,0 +1,21 @@
+a.nada:link {
+  text-decoration: none;
+}
+
+a.nada:visited {
+  text-decoration: none;
+}
+
+a.nada:active {
+  text-decoration: none;
+}
+
+div.card-body.dim:hover {
+  background-color: whitesmoke;
+}
+
+div.card {
+  min-height: 30vh;
+  max-height: 30vh;
+  overflow: scroll;
+}

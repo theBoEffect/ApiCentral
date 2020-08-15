@@ -8,7 +8,7 @@ import { LandingComponent } from './landing/landing.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'apis', component: ApisComponent },
-  { path: 'api', component: ApiPageComponent },
+  { path: 'api/:id', component: ApiPageComponent },
   { path: 'admin', component: AdminComponent }
 ];
 

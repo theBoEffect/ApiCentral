@@ -12,13 +12,15 @@
   <div class="container">
     <div class="row">
       <div *ngFor="let card of settings.infoBlocks" class="col-md-4">
-        <div class="card">
-          <img src="{{card.image}}" class="card-img-top" alt="info image">
-          <div class="card-body">
-            <h5 class="card-title">{{card.title}}</h5>
-            <p class="card-text">{{card.body}}</p>
+        <a class="nada" href="{{card.href}}">
+          <div class="card">
+            <img src="{{card.image}}" class="card-img-top" alt="info image">
+            <div class="card-body dim">
+              <h5 class="card-title">{{card.title}}</h5>
+              <p class="card-text">{{card.body}}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>

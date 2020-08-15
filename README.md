@@ -86,6 +86,7 @@ Since this is a single tenant solution (one instance per organization requiring 
 ## Local Build Instruction
 
 * Clone the project
+* Somewhere on your system run: docker run -p 27017:27017 mongo
 * yarn run settings
 * Update ./settings.json with your site settings
 * yarn
@@ -94,7 +95,11 @@ Since this is a single tenant solution (one instance per organization requiring 
 * yarn run build-ui
 * yarn run dev
 * http://localhost:3000
-* Go to http://localhost:3000/api for API documentation
+
+### Temporary
+
+Until the admin pages and security is in place, you'll need to add specs using swagger rather than the UI: http://localhost:3000/swagger
+
 
 ## UI
 
@@ -111,10 +116,11 @@ From here all the normal angular commands would apply (i.e. ng). When you're rea
 
 ## TODO
 
-* UI Wire Up
+* UI Admin pages
+* Auth
 * Unit tests for specs
-* Auth?
-* Update approach to settings
+* Docker Compose - make local getting started easier...
+* Deployment instructions for docker and lambda
 
 ## Credits
 

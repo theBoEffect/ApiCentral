@@ -4,7 +4,29 @@
 </div>
 <div class="section">
   <div class="container">
-    <h1>APIs Here</h1>
-    <div id="redoc-container"></div>
+    <div class="row">
+      <div class="col-md-4">
+        <a class="nada" href="/api/local" routerLinkActive="active">
+          <div class="card">
+            <div class="card-body dim">
+              <h3 class="card-title">Portal API</h3>
+              <p class="card-text text-black">The REST API powering this developer portal.</p>
+              <a href="{{env.service}}/swagger" class="btn btn-outline-info" target="_blank">Swagger UI Redirect</a>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div *ngFor="let api of apis" class="col-md-4">
+        <a class="nada" href="/api/{{api.id}}" routerLinkActive="active">
+          <div class="card">
+            <div class="card-body dim">
+              <h3 class="card-title">{{api.displayTitle}}</h3>
+              <p class="card-text text-black">{{api.displayDescription}}</p>
+              <a *ngIf="api.swaggerUiUrl" href="{{api.swaggerUiUrl}}" class="btn btn-outline-info" target="_blank">Swagger UI Redirect</a>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
