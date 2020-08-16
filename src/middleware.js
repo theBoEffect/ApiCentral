@@ -3,6 +3,8 @@ import Boom from '@hapi/boom';
 import handleErrors from './customErrorHandler';
 import { sayMiddleware } from './say';
 import swag from './swagger';
+import express from "express";
+import path from 'path';
 const schema = new OpenApiValidator(swag);
 
 export default {
@@ -13,7 +15,10 @@ export default {
         next();
     },
     catch404 (req, res, next) {
-        next(handleErrors.catch404());
+        // Since this serves both API and UI, we want to make sure UI redirects to root on unknown requests while api returns 404
+        const pathParts = req.path.split('/');
+        if(pathParts[1]==='api') return next(handleErrors.catch404());
+        return res.redirect('/');
     },
     async catchErrors (err, req, res, next) {
         try {

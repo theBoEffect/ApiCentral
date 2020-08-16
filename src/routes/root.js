@@ -8,7 +8,7 @@ const pJson = require('../../package.json');
 
 router.use('/', express.static(path.join(__dirname, '../../public/portal')));
 
-router.get('/app', (req, res) => {
+router.get('/service', (req, res) => {
     res.render('index', { title: pJson.name, description: pJson.description, by: pJson.author, url: pJson.url  })
 });
 
