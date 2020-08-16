@@ -87,9 +87,9 @@ Since this is a single tenant solution (one instance per organization requiring 
 
 * Clone the project
 * Somewhere on your system run: docker run -p 27017:27017 mongo
+* yarn
 * yarn run settings
 * Update ./settings.json with your site settings
-* yarn
 * yarn test (optional)
 * yarn run test-ui (optional)
 * yarn run build-ui
@@ -106,9 +106,9 @@ Until the admin pages and security is in place, you'll need to add specs using s
 The UI its own embedded SPA project that simply builds to the parent public folder. This way it can easily be worked on separately or pulled out entirely. It is an angular 10 project under the /portal file. To develop or modify the UI do the following:
 
 * Clone the project
+* yarn
 * yarn run settings
 * cd portal/
-* yarn
 * yarn test (optional)
 * yarn start
 

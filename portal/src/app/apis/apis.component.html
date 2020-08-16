@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <a class="nada" href="/api/local" routerLinkActive="active">
+        <a class="nada" routerLink="/apis/local"  routerLinkActive="active">
           <div class="card">
             <div class="card-body dim">
               <h3 class="card-title">Portal API</h3>
@@ -17,7 +17,7 @@
         </a>
       </div>
       <div *ngFor="let api of apis" class="col-md-4">
-        <a class="nada" href="/api/{{api.id}}" routerLinkActive="active">
+        <a class="nada" routerLink="/apis/{{api.id}}" routerLinkActive="active">
           <div class="card">
             <div class="card-body dim">
               <h3 class="card-title">{{api.displayTitle}}</h3>
