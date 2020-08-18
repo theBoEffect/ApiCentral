@@ -1,0 +1,22 @@
+.text-area-border {
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+a.nada:link {
+  text-decoration: none;
+  color: #495057;
+}
+
+a.nada:visited {
+  text-decoration: none;
+  color: #495057;
+}
+
+a.nada:active {
+  text-decoration: none;
+  color: #495057;
+}
+
+i.delete:hover {
+  color: red;
+}

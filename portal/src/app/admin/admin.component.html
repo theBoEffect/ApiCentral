@@ -2,3 +2,51 @@
   <div class="page-header-image" data-parallax="true" style="background-image: url('{{settings.bannerImage}}');">
   </div>
 </div>
+<div class="section">
+  <div class="container">
+    <h3>Current APIs</h3>
+    <div class="list-group">
+      <div *ngFor="let api of apis" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="#" class="nada">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{api.displayTitle}}</h5>
+          </div>
+          <p class="mb-1">{{api.displayDescription}}</p>
+        </a>
+        <i class="fa fa-trash delete" aria-hidden="true"></i>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success" (click)="open(addModal)">ADD New API</button>
+  </div>
+</div>
+<ng-template #addModal let-modal>
+  <div class="section">
+    <div class="container">
+      <h3>Add New API</h3>
+      <form>
+        <div class="form-group">
+          <label for="apiSpecJsonUri">Open API JSON URI</label>
+          <input type="url" class="form-control" id="apiSpecJsonUri" aria-describedby="openApiJsonUri" placeholder="Enter URI">
+        </div>
+        <div class="form-group">
+          <label for="swaggerUiUrl">Swagger UI URL</label>
+          <input type="url" class="form-control" id="swaggerUiUrl" placeholder="Enter Swagger UI URL">
+          <small id="swaggerUiUrlNote" class="form-text text-muted">This is optional</small>
+        </div>
+        <div class="form-group">
+          <label for="displayTitle">API Name</label>
+          <input type="text" class="form-control" id="displayTitle" aria-describedby="displayTitle" placeholder="Enter name">
+          <small id="displayTitleNote" class="form-text text-muted">This is used as a title on the APIs page</small>
+        </div>
+        <div class="form-group">
+          <label for="displayDescription">API Description</label>
+          <textarea type="text" class="form-control text-area-border" id="displayDescription" aria-describedby="displayDescription" placeholder="Enter description..."></textarea>
+          <small id="displayDescriptionNote" class="form-text text-muted">This is used as a brief description on the APIs page</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-danger" (click)="modal.dismiss('Cross click')">Cancel</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+

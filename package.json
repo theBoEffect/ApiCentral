@@ -1,5 +1,5 @@
 {
-  "name": "OpenApiDevPortal",
+  "name": "ApiCentral",
   "version": "1.0.0",
   "description": "An easy way to aggregate swagger specs into a dev portal.",
   "private": false,
