@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   ) {
     this.addForm = this.formBuilder.group({
       apiSpecJsonUri: ['', Validators.required],
-      swaggerUiUrl: [''],
+      swaggerUiUrl: [undefined],
       displayTitle: ['',  Validators.required],
       displayDescription: ['', Validators.required],
     });
@@ -29,7 +29,6 @@ export class AdminComponent implements OnInit {
     try {
       const resp = await this.SchService.getApis().toPromise();
       this.apis = resp.data;
-      console.info(this.apis)
     } catch (error) {
       console.error(error);
     }
@@ -48,36 +47,74 @@ export class AdminComponent implements OnInit {
       }
       const result = await this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result;
       if (edit) {
-        console.info('UPDATING');
-        return this.updateApi();
+        return this.updateApi(api);
       }
-      console.info( `WE HAVE ${result}`);
       return this.saveNew();
     } catch (error) {
+      //todo show error
       console.info( `error ${error}`)
     }
   }
 
-  async updateApi() {
-    console.info('this worked update');
-    console.info(this.addForm.getRawValue());
-    //todo call service and update api record
+  async updateApi(api) {
+    const data = [];
+    const patch = this.addForm.getRawValue();
+    for (let x in patch) {
+      await new Promise((next) => {
+        if(patch[x] === '' || patch[x] === undefined) {
+          data.push({
+            op: 'remove',
+            path: `/${x}`
+          });
+          next();
+        } else {
+          if (!api[x]) {
+            data.push({
+              op: 'add',
+              path: `/${x}`,
+              value: patch[x]
+            });
+            next();
+          }else {
+            data.push({
+              op: 'replace',
+              path: `/${x}`,
+              value: patch[x]
+            });
+            next();
+          }
+        }
+      })
+    }
+    const result = await this.SchService.updateApi(api.id, data).toPromise();
+    console.info(result.data);
+    this.refresh();
     this.addForm.reset();
-
   }
 
   async saveNew() {
-    console.info('this worked new');
-    console.info(this.addForm.getRawValue());
-    //todo call service and make api record
-    this.addForm.reset();
+    try {
+      const data = JSON.parse(JSON.stringify(this.addForm.getRawValue()));
+      if(!data.swaggerUiUrl) delete data.swaggerUiUrl;
+      const result = await this.SchService.addApi(data).toPromise();
+      console.info(result.data);
+      this.refresh();
+      this.addForm.reset();
+    } catch (error) {
+      // todo error message
+      console.error(error);
+    }
   }
 
   async delete(id) {
     try {
-      console.info(`DELETE ${id}`);
+      const result = await this.SchService.deleteApi(id).toPromise();
+      console.info(result.data);
+      this.refresh();
+      this.addForm.reset();
     } catch (error) {
       //show
+      console.error(error);
     }
   }
 

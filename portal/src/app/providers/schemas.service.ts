@@ -34,4 +34,16 @@ export class SchemasService {
   getApi(id):Observable<any> {
     return this.http.get(`${this.apiUrl}/schema/${id}`, this.httpOptions);
   }
+
+  addApi(data):Observable<any> {
+    return this.http.post(`${this.apiUrl}/schema`, data, this.httpOptions);
+  }
+
+  updateApi(id, data):Observable<any> {
+    return this.http.patch(`${this.apiUrl}/schema/${id}`, data, this.httpOptions);
+  }
+
+  deleteApi(id):Observable<any> {
+    return this.http.delete(`${this.apiUrl}/schema/${id}`, this.httpOptions);
+  }
 }

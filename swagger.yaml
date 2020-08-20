@@ -356,10 +356,11 @@ components:
           - required:
               - op
               - path
+              - value
             properties:
               op:
                 type: string
-                enum: ['replace', 'add', 'remove', 'move', 'copy', 'test']
+                enum: ['replace', 'add', 'move', 'copy', 'test']
               path:
                 type: string
                 description: 'A path to the property in the data model. For example /name/firstName or /emails/-'
@@ -369,10 +370,11 @@ components:
           - required:
               - op
               - path
+              - value
             properties:
               op:
                 type: string
-                enum: ['replace', 'add', 'remove', 'move', 'copy', 'test']
+                enum: ['replace', 'add', 'move', 'copy', 'test']
               path:
                 type: string
                 description: 'A path to the property in the data model. For example /name/firstName or /emails/-'
@@ -382,10 +384,11 @@ components:
           - required:
               - op
               - path
+              - value
             properties:
               op:
                 type: string
-                enum: ['replace', 'add', 'remove', 'move', 'copy', 'test']
+                enum: ['replace', 'add', 'move', 'copy', 'test']
               path:
                 type: string
                 description: 'A path to the property in the data model. For example /name/firstName or /emails/-'
