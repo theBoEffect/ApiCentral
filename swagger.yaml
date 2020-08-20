@@ -12,6 +12,9 @@ tags:
     description: Schema Registration and Crud
   - name: Settings
     description: Single tenant settings for the portal
+  - name: Admins
+    description: Locally defined Users who have admin access through basic auth. not recommended for a large number of users.
+
 paths:
   /settings:
     get:
@@ -28,6 +31,135 @@ paths:
                 $ref: '#/components/schemas/settingObject'
       security:
         - Bearer: []
+        - basicAuth: []
+  /users:
+    post:
+      tags:
+        - Admins
+      summary: Add a new locally stored user
+      description: Add a new locally stored user
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userObject'
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+        '417':
+          description: Expectation failed - invalid openApi URL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/writeUser'
+        description: Schema data to be written
+        required: true
+    get:
+      tags:
+        - Admins
+      summary: Retrieve all locally defined users
+      description: Retrieve all locally defined users
+      parameters:
+        - name: $filter
+          in: query
+          description: oData filter Query
+          required: false
+          schema:
+            type: string
+        - name: $select
+          in: query
+          description: oData select Query
+          required: false
+          schema:
+            type: string
+        - name: $orderby
+          in: query
+          description: oData orderby Query
+          required: false
+          schema:
+            type: string
+        - name: $skip
+          in: query
+          description: oData skip Query
+          required: false
+          schema:
+            type: string
+        - name: $top
+          in: query
+          description: oData top Query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/userObject'
+      security:
+        - Bearer: []
+        - basicAuth: []
+  '/users/{id}':
+    get:
+      tags:
+        - Admins
+      summary: Find a user with its ID
+      description: Find a user with its ID
+      parameters:
+        - name: id
+          in: path
+          description: id of user to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userObject'
+        '400':
+          description: Invalid request
+        '404':
+          description: Not found
+      security:
+        - Bearer: []
+        - basicAuth: []
+    delete:
+      tags:
+        - Admins
+      summary: Delete a user with its ID
+      description: Delete a user with its ID
+      parameters:
+        - name: id
+          in: path
+          description: id of user to remove
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userObject'
+        '400':
+          description: Invalid request
+        '404':
+          description: Not found
+      security:
+        - Bearer: []
+        - basicAuth: []
+
   /schema:
     post:
       tags:
@@ -47,6 +179,7 @@ paths:
           description: Expectation failed - invalid openApi URL
       security:
         - Bearer: []
+        - basicAuth: []
       requestBody:
         content:
           application/json:
@@ -97,8 +230,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/schemaObjects'
-      security:
-        - Bearer: []
   '/schema/{id}':
     get:
       tags:
@@ -123,8 +254,6 @@ paths:
           description: Invalid request
         '404':
           description: Not found
-      security:
-        - Bearer: []
     patch:
       tags:
         - Specs
@@ -148,6 +277,7 @@ paths:
           description: Invalid request
       security:
         - Bearer: []
+        - basicAuth: []
       requestBody:
         content:
           application/json:
@@ -180,6 +310,7 @@ paths:
           description: Not found
       security:
         - Bearer: []
+        - basicAuth: []
   /health:
     get:
       tags:
@@ -343,6 +474,34 @@ components:
         displayDescription:
           type: string
           description: the description to display on the portal main page
+
+    writeUser:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: login email/username
+        password:
+          type: string
+          format: password
+          description: login password
+
+    userObject:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/writeUser'
+      properties:
+        created:
+          type: string
+          format: date-time
+        id:
+          type: string
+          description: unique guid of the user
 
 
     jsonPatch:

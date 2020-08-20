@@ -3,8 +3,7 @@ import Boom from '@hapi/boom';
 import handleErrors from './customErrorHandler';
 import { sayMiddleware } from './say';
 import swag from './swagger';
-import express from "express";
-import path from 'path';
+import authorizer from './auth/auth';
 const schema = new OpenApiValidator(swag);
 
 export default {
@@ -40,5 +39,6 @@ export default {
         } catch (error) {
             next(Boom.expectationFailed('OpenAPI Schema Validation'));
         }
-    }
+    },
+    isAuthenticated: authorizer.isAuthenticated
 }

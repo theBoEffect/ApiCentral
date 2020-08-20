@@ -5,6 +5,11 @@
   margin-right: 10px;
   margin-bottom: 10px;
 }
+
+.nada {
+  color: darkslategray;
+}
+
 a.nada:link {
   text-decoration: none;
 }
@@ -19,4 +24,5 @@ a.nada:active {
 
 div.card-body.dim:hover {
   background-color: whitesmoke;
+  color: darkslategray;
 }
