@@ -47,7 +47,7 @@
   <div class="container">
     <h2 class="title">Want to work with us?</h2>
     <p class="description">Your project is very important to us.</p>
-    <form action="https://formspree.io/{{settings.formspree}}" method="POST">
+    <form [FormGroup]="contactForm" ngNoForm action="https://formspree.io/{{settings.formspree}}" method="POST">
       <div class="input-group input-lg">
         <div class="input-group-prepend">
                 <span style="padding: 10px" class="input-group-text">
