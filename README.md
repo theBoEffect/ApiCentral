@@ -75,6 +75,7 @@ Since this is a single tenant solution (one instance per organization requiring 
   "aboutCompanyImage": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png",
   "aboutCompanyTitle": "About theBoEffect LLC REST APIs",
   "aboutCompany": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Interdum velit euismod in pellentesque massa placerat duis ultricies. Odio eu feugiat pretium nibh ipsum. Tristique nulla aliquet enim tortor at auctor urna nunc id. Urna nunc id cursus metus aliquam. Malesuada pellentesque elit eget gravida cum sociis. Gravida rutrum quisque non tellus.",
+  "allowRegister": true,
   "metaData": {
     "siteUrl": "http://localhost:3000",
     "siteName": "Developer Portal",
@@ -96,9 +97,16 @@ Since this is a single tenant solution (one instance per organization requiring 
 * yarn run dev
 * http://localhost:3000
 
-### Temporary
+### Getting Started
 
-Until the admin pages and security is in place, you'll need to add specs using swagger rather than the UI: http://localhost:3000/swagger
+* Register as a user from the login page
+* Login
+* Add Swagger spec references from the Admin page
+* You may want to go back and set settings.allowRegister to false after this initial setup so that people can't register as admin users on their own. This will require a restart/redeploy
+
+### Access
+
+The api allows local admins to register by default (settings.allowRegister = true). You'll want to set that to false before deploying publicly once you've set up the desired admin accounts. In the future, an OIDC integration will make access possible at scale for an org.
 
 
 ## UI
@@ -116,8 +124,7 @@ From here all the normal angular commands would apply (i.e. ng). When you're rea
 
 ## TODO
 
-* UI Admin pages
-* Auth
+* login
 * Unit tests for specs
 * Docker Compose - make local getting started easier...
 * Deployment instructions for docker and lambda
