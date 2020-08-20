@@ -2,6 +2,16 @@
   <div class="page-header-image" data-parallax="true" style="background-image: url('{{settings.bannerImage}}');">
   </div>
 </div>
+<nav class="navbar justify-content-end">
+  <ul class="navbar-nav">
+    <li *ngIf="!loggedIn" class="nav-item">
+      <a style="color: darkslateblue" class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+    <li *ngIf="loggedIn" class="nav-item">
+      <a routerLink="/" routerLinkActive="active" (click)="logout()" style="color: darkslateblue" class="nav-link">Logout</a>
+    </li>
+  </ul>
+</nav>
 <div class="section">
   <div class="container">
     <h3>Current APIs</h3>
@@ -13,14 +23,14 @@
           </div>
           <p class="mb-1">{{api.displayDescription}}</p>
         </a>
-        <i class="fa fa-trash delete" aria-hidden="true" (click)="delete(api.id)"></i>
+        <i *ngIf="loggedIn" class="fa fa-trash delete" aria-hidden="true" (click)="delete(api.id)"></i>
       </div>
     </div>
-    <button type="button" class="btn btn-success" (click)="open(addModal)">ADD New API</button>
+    <button *ngIf="loggedIn" type="button" class="btn btn-success" (click)="open(addModal)">ADD New API</button>
   </div>
 </div>
 <ng-template #addModal let-modal>
-  <div class="section">
+  <div *ngIf="loggedIn" class="section">
     <div class="container">
       <h3>Add or Update API</h3>
       <form [formGroup]="addForm" (ngSubmit)="modal.close('SAVED');">
@@ -49,4 +59,3 @@
     </div>
   </div>
 </ng-template>
-

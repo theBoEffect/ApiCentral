@@ -26,8 +26,11 @@ const api = {
     },
     async getUser(req, res, next) {
         try {
-            const result = await users.getUser(req.params.id);
-            if (!result) throw Boom.notFound(`id requested was ${req.params.id}`);
+            let id;
+            if(req.params.id === 'me') id = req.user.id;
+            else id = req.params.id;
+            const result = await users.getUser(id);
+            if (!result) throw Boom.notFound(`id requested was ${id}`);
             return res.respond(say.ok(result, RESOURCE));
         } catch (error) {
             next(error);

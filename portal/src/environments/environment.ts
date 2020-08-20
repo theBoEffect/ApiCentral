@@ -6,7 +6,8 @@ import * as siteSettings from '../../settings.json';
 const setting: any = siteSettings;
 export const environment = {
   production: false,
-  service: 'http://localhost:3000',
+  protocol: 'http',
+  service: 'localhost:3000',
   setting: setting.default
 };
 

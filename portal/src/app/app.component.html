@@ -25,7 +25,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/#contact">Contact</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="loggedIn" class="nav-item">
           <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
         </li>
         <li *ngIf="settings.twitter" class="nav-item">
@@ -67,6 +67,9 @@
             <a href="{{foot.href}}">
               {{foot.text}}
             </a>
+          </li>
+          <li *ngIf="!loggedIn">
+            <a routerLink="/login" routerLinkActive="active">login</a>
           </li>
         </ul>
       </nav>

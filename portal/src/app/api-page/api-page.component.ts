@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {SchemasService} from "../providers/schemas.service";
+import {SchemasService} from "../services/schemas.service";
 import {ActivatedRoute} from "@angular/router";
 
 declare let Redoc: any;

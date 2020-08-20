@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {SchemasService} from "../providers/schemas.service";
+import {SchemasService} from "../services/schemas.service";
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {LoginService} from '../services/login.service';
+import {User} from '../models/user';
 
 @Component({
   selector: 'app-admin',
@@ -12,10 +14,13 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class AdminComponent implements OnInit {
   public apis: any;
   public addForm: FormGroup;
+  private user: User;
+  public loggedIn: boolean = false;
   constructor(
     public SchService: SchemasService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
+    private access: LoginService
   ) {
     this.addForm = this.formBuilder.group({
       apiSpecJsonUri: ['', Validators.required],
@@ -23,6 +28,8 @@ export class AdminComponent implements OnInit {
       displayTitle: ['',  Validators.required],
       displayDescription: ['', Validators.required],
     });
+    this.user = this.access.currentUserValue;
+    if(this.user) this.loggedIn = true;
   }
   public settings:any = environment.setting;
   async refresh(){
@@ -116,6 +123,11 @@ export class AdminComponent implements OnInit {
       //show
       console.error(error);
     }
+  }
+
+  async logout() {
+    console.info(this.user);
+    return this.access.logout();
   }
 
   ngOnInit(): void {

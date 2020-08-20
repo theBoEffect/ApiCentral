@@ -10,7 +10,8 @@ import { LandingComponent } from './landing/landing.component';
 import { ApiPageComponent } from './api-page/api-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SchemasService} from "./providers/schemas.service";
+import { SchemasService} from "./services/schemas.service";
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SchemasService} from "./providers/schemas.service";
     ApisComponent,
     LandingComponent,
     ApiPageComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

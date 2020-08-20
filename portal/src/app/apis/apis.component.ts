@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {SchemasService} from "../providers/schemas.service";
+import {SchemasService} from "../services/schemas.service";
 
 @Component({
   selector: 'app-apis',

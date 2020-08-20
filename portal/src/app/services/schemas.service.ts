@@ -12,7 +12,7 @@ export class SchemasService {
     console.log('Schema Service Enabled');
   }
   public env:any = environment;
-  public apiUrl = `${this.env.service}/api`;
+  public apiUrl = `${this.env.protocol}://${this.env.service}/api`;
   setAuthHeader(token) {
     this.httpOptions = {
       headers: new HttpHeaders({
