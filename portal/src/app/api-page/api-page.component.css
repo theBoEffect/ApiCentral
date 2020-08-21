@@ -1,0 +1,4 @@
+.fix-redoc {
+  top: 130px !important;
+  height: calc(100vh - 50px);
+}

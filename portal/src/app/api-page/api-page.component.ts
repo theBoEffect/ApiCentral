@@ -26,15 +26,22 @@ export class ApiPageComponent implements OnInit, AfterViewInit {
   async ngAfterViewInit() {
     try {
       this.id = this.route.snapshot.paramMap.get('id');
-      if(this.id === 'local') this.spec = `${this.env.service}/swagger.json`;
+      if(this.id === 'local') this.spec = `${this.env.protocol}://${this.env.service}/swagger.json`;
       else {
         const resp = await this.SchService.getApi(this.id).toPromise();
         if(resp.data && resp.data.apiSpecJsonUri) this.spec = resp.data.apiSpecJsonUri;
         else throw resp;
       }
-      Redoc.init(this.spec, {
+      await Redoc.init(this.spec, {
         scrollYOffset: 50
-      }, document.getElementById('redoc-container'))
+      }, document.getElementById('redoc-container'), () => {
+        console.info('after');
+        const elements = document.querySelectorAll<HTMLElement>('div.sc-qYSYK.cfUfoh.menu-content');
+        console.info(elements[0]);
+        elements[0].setAttribute("class", "sc-qYSYK cfUfoh menu-content fix-redoc")
+      });
+
+
     } catch (error) {
       console.error(error);
     }
