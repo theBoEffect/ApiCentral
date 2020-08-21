@@ -50,6 +50,8 @@
   "aboutCompany": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Interdum velit euismod in pellentesque massa placerat duis ultricies. Odio eu feugiat pretium nibh ipsum. Tristique nulla aliquet enim tortor at auctor urna nunc id. Urna nunc id cursus metus aliquam. Malesuada pellentesque elit eget gravida cum sociis. Gravida rutrum quisque non tellus.",
   "aboutButton": "Learn More",
   "allowRegister": true,
+  "protocol": "http",
+  "service": "localhost:3000",
   "metaData": {
     "siteUrl": "http://localhost:3000",
     "siteName": "Developer Portal",

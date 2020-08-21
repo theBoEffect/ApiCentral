@@ -2,6 +2,14 @@
 
 This project allows you to register openAPI specs that are hosted in other services. The application persists these and then makes them available in an aggregated portal as a Development Portal.
 
+## Example Deployment - Served via AWS Lambda
+
+[Mail My Voice API](https://api.mailmyvoice.com)
+
+## CI
+
+will be added soon!
+
 #### follow me:
 * [twitter](https://twitter.com/theboeffect)
 * [linkedIn](https://www.linkedin.com/in/bmotlagh/)
@@ -143,6 +151,7 @@ Since this is a single tenant solution (one instance per organization requiring 
 * Unit tests for specs
 * Unit tests for User
 * Deployment instructions for docker and lambda
+* CI for builds
 
 ## Roadmap
 

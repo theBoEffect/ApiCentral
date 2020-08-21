@@ -10,11 +10,11 @@
     "dist": "nodemon ./dist/start.js",
     "build": "yarn && yarn build",
     "settings": "node ./addSettingsToPortal.js",
-    "build-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd",
+    "build-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build --prod && popd",
     "test-ui": "node ./addSettingsToPortal.js && pushd ./portal && yarn test && popd",
-    "build-all": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist",
-    "package": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls package",
-    "deploy": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build && popd && yarn && babel src -d dist && sls deploy",
+    "build-all": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build --prod && popd && yarn && babel src -d dist",
+    "package": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build --prod && popd && yarn && yarn test && babel src -d dist && sls package",
+    "deploy": "node ./addSettingsToPortal.js && pushd ./portal && yarn && yarn build --prod && popd && yarn && yarn test && babel src -d dist && sls deploy",
     "test": "jest"
   },
   "keywords": [
