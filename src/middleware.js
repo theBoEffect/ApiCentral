@@ -15,8 +15,10 @@ export default {
     },
     catch404 (req, res, next) {
         // Since this serves both API and UI, we want to make sure UI redirects to root on unknown requests while api returns 404
-        const pathParts = req.path.split('/');
-        if(pathParts[1]==='api') return next(handleErrors.catch404());
+        if (req.path) {
+            const pathParts = req.path.split('/');
+            if(pathParts[1]==='api') return next(handleErrors.catch404());
+        }
         return res.redirect('/');
     },
     async catchErrors (err, req, res, next) {

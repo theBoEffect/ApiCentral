@@ -43,6 +43,16 @@ export class LoginService {
       }));
   }
 
+  register(email: string, password: string):Observable<any>  {
+    if(this.env.setting.allowRegister !== true) throw {message: 'Registration not allowed'};
+    const url = `${this.apiP}://${this.apiUrl}/users`;
+    const data = {
+      email,
+      password
+    };
+    return this.http.post(url, data);
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');

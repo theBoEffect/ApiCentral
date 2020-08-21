@@ -5,9 +5,12 @@ RUN mkdir /app
 COPY . /app
 WORKDIR /app
 RUN yarn
-RUN yarn run build-ui
+RUN yarn run settings
+WORKDIR /app/portal
+RUN yarn
+RUN yarn build
+WORKDIR /app
 RUN yarn test
-#RUN yarn run test-ui
 
 EXPOSE 3000
 

@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: "dev"
+      PROTOCOL: "http"
+      MONGO: "mongodb://db:27017/your-db"
+      SWAGGER: "localhost:3000"
+      REPLICA: "rs0" # if needed and only in prod
+      PERSIST_HTTP_ERRORS: "false"
+      WRITE_LOGS_TO_DB: "false"
+    links:
+      - "db"
+  db:
+    image: "mongo"
+    ports:
+      - "27017:27017"

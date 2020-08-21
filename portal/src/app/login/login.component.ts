@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  message = '';
   public settings:any = environment.setting;
   public reg:boolean = this.settings.allowRegister;
   constructor(
@@ -45,7 +46,19 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   async register() {
-    console.info('lets dooo it');
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+    try {
+      this.loading = true;
+      await this.authenticationService.register(this.f.email.value, this.f.password.value).toPromise();
+      this.message = 'You are registered! Now please login using the same credentials.';
+      this.loading = false;
+    } catch (error) {
+      this.error = (error.message) ? error.message : JSON.stringify(error);
+      this.loading = false;
+    }
   }
 
   async onSubmit() {

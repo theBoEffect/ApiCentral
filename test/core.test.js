@@ -65,14 +65,25 @@ describe('Middleware tests', () => {
         }
     });
 
-    test('make sure catch404 middleware works', async () => {
+    test('make sure catch404 middleware to send 404 on api', async () => {
         try {
-            const req = {}, res = { sendStatus: jest.fn(), header: jest.fn() }, next = jest.fn();
+            const req = { path: "/api/xyz" }, res = { sendStatus: jest.fn(), header: jest.fn() }, next = jest.fn();
             await m.catch404(req, res, next);
             expect(next).toHaveBeenCalledWith(Boom.notFound('Resource not found'));
         } catch (error) {
             console.info(error);
             fail();
+        }
+    });
+
+    test('make sure catch404 middleware redirects to home on all routes except api', async () => {
+        try {
+            const req = {}, res = { redirect: jest.fn(), sendStatus: jest.fn(), header: jest.fn() }, next = jest.fn();
+            await m.catch404(req, res, next);
+            expect(res.redirect).toHaveBeenCalledWith('/');
+        } catch (error) {
+            console.info(error);
+            fail(error);
         }
     });
 
