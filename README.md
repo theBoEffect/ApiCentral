@@ -124,9 +124,10 @@ From here all the normal angular commands would apply (i.e. ng). When you're rea
 
 ## TODO
 
-* login error where password is cached
-* need to refresh app on login
+* Regsiter modal
+* fix menu and scrolling issue
 * Unit tests for specs
+* Unit tests for User
 * Docker Compose - make local getting started easier...
 * Deployment instructions for docker and lambda
 

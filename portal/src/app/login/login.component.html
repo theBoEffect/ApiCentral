@@ -11,10 +11,10 @@
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="username">Email</label>
-          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Email is required</div>
+          <label for="email">Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
           </div>
         </div>
         <div class="form-group">
@@ -24,9 +24,12 @@
             <div *ngIf="f.password.errors.required">Password is required</div>
           </div>
         </div>
-        <button [disabled]="loading" class="btn btn-primary">
+        <button [disabled]="loading" class="btn btn-primary" type="submit">
           <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
           Login
+        </button>
+        <button *ngIf="reg === true" type="button" (click)="register()" class="btn btn-info">
+          Register
         </button>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
       </form>

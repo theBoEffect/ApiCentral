@@ -21,7 +21,7 @@
             <div class="card-body dim">
               <a class="nada" routerLink="/apis/{{api.id}}" routerLinkActive="active">
                 <h3 class="card-title">{{api.displayTitle}}</h3>
-                <p class="card-text text-black">{{api.displayDescription}}</p>
+                <p class="card-text text-black fit-text">{{api.displayDescription}}</p>
               </a>
               <a *ngIf="api.swaggerUiUrl" href="{{api.swaggerUiUrl}}" class="btn btn-outline-info" target="_blank">Swagger UI Redirect</a>
             </div>

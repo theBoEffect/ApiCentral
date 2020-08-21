@@ -26,13 +26,13 @@ export class LoginService {
   }
 
   login(email: string, password: string) {
-    console.info('this happened');
     const url = `${this.apiP}://${this.apiUrl}/users/me`;
     this.httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `basic ${window.btoa(email + ':' + password)}`
       })
     };
+
     return this.http.get<any>(url, this.httpOptions)
       .pipe(map((result:any) => {
         const user = JSON.parse(JSON.stringify(result.data));

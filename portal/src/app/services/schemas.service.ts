@@ -2,21 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import { Observable, of } from 'rxjs';
+import {User} from "../models/user";
+import {LoginService} from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchemasService {
   httpOptions;
-  constructor(private http: HttpClient) {
+  private user: User;
+  constructor(
+    private http: HttpClient,
+    private access: LoginService
+  ) {
     console.log('Schema Service Enabled');
+    this.user = this.access.currentUserValue;
+    if(this.user && this.user.authdata) this.setAuthHeader();
   }
   public env:any = environment;
   public apiUrl = `${this.env.protocol}://${this.env.service}/api`;
-  setAuthHeader(token) {
+
+  setAuthHeader() {
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Basic ${this.user.authdata}`
       })
     };
   }
@@ -28,11 +37,11 @@ export class SchemasService {
   }
 
   getApis():Observable<any> {
-    return this.http.get(`${this.apiUrl}/schema`, this.httpOptions);
+    return this.http.get(`${this.apiUrl}/schema`);
   }
 
   getApi(id):Observable<any> {
-    return this.http.get(`${this.apiUrl}/schema/${id}`, this.httpOptions);
+    return this.http.get(`${this.apiUrl}/schema/${id}`);
   }
 
   addApi(data):Observable<any> {

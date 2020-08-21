@@ -1,4 +1,5 @@
 import User from './model';
+import Boom from '@hapi/boom';
 
 export default {
     async writeUser(data) {
@@ -16,9 +17,9 @@ export default {
     },
     async lookup(email, password) {
         const user = await User.findOne({ email });
-        if(user.verifyPassword(password)){
+        if(await user.verifyPassword(password)){
             return user;
         }
-        throw new Error('Wrong Password')
+        throw Boom.unauthorized('wrong password')
     }
 };

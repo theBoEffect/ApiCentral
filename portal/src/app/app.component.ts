@@ -20,7 +20,11 @@ export class AppComponent {
     private access: LoginService
   ) {
     this.titleService.setTitle(this.title);
+    this.reset();
+  }
+
+  public reset(){
     this.user = this.access.currentUserValue;
-    if(this.user) this.loggedIn = true;
+    this.loggedIn = !!this.user;
   }
 }

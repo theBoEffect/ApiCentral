@@ -4,6 +4,7 @@ import {SchemasService} from "../services/schemas.service";
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {LoginService} from '../services/login.service';
+import {AppComponent} from "../app.component";
 import {User} from '../models/user';
 
 @Component({
@@ -20,7 +21,8 @@ export class AdminComponent implements OnInit {
     public SchService: SchemasService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private access: LoginService
+    private access: LoginService,
+    private app: AppComponent
   ) {
     this.addForm = this.formBuilder.group({
       apiSpecJsonUri: ['', Validators.required],
@@ -126,8 +128,8 @@ export class AdminComponent implements OnInit {
   }
 
   async logout() {
-    console.info(this.user);
-    return this.access.logout();
+    await this.access.logout();
+    return this.app.reset();
   }
 
   ngOnInit(): void {
