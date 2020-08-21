@@ -6,6 +6,11 @@
   margin-bottom: 10px;
 }
 
+.infoBlockSize {
+  max-height: 600px;
+  min-height: 600px;
+}
+
 .nada {
   color: darkslategray;
 }

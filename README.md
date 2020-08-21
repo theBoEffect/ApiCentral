@@ -139,6 +139,7 @@ Since this is a single tenant solution (one instance per organization requiring 
 
 ## TODO
 
+* UI metadata
 * Unit tests for specs
 * Unit tests for User
 * Deployment instructions for docker and lambda

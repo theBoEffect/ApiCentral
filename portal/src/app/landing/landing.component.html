@@ -13,7 +13,7 @@
     <div class="row">
       <div *ngFor="let card of settings.infoBlocks" class="col-md-4">
         <a class="nada" href="{{card.href}}">
-          <div class="card">
+          <div class="card infoBlockSize">
             <img src="{{card.image}}" class="card-img-top" alt="info image">
             <div class="card-body dim">
               <h5 class="card-title">{{card.title}}</h5>
@@ -36,7 +36,7 @@
           <div class="card-body">
             <h5 class="card-title">{{settings.aboutCompanyTitle}}</h5>
             <p class="card-text">{{settings.aboutCompany}}</p>
-            <a href="{{settings.aboutCompanyUrl}}" class="btn btn-primary">Learn More</a>
+            <a href="{{settings.aboutCompanyUrl}}" class="btn btn-primary">{{settings.aboutButton}}</a>
           </div>
         </div>
       </div>
