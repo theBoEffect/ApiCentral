@@ -32,7 +32,6 @@ If you'd rather use a different database or ODM, the following modifications are
 * update settings
 * docker-compose up
 * http://localhost:3000
-
 * TIPS
     * If you want to rebuild without cached content: "docker-compose up --no-cache"
     * If you have cached containers or dangling images messing up the build you can use "docker system prune"
