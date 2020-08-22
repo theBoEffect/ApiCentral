@@ -36,7 +36,8 @@
           <div class="card-body">
             <h5 class="card-title">{{settings.aboutCompanyTitle}}</h5>
             <p class="card-text">{{settings.aboutCompany}}</p>
-            <a href="{{settings.aboutCompanyUrl}}" class="btn btn-primary">{{settings.aboutButton}}</a>
+            <a *ngIf="aboutInternal === true" routerLink="{{settings.aboutCompanyUrl}}" routerLinkActive="active" class="btn btn-primary">{{settings.aboutButton}}</a>
+            <a *ngIf="aboutInternal === false" href="{{settings.aboutCompanyUrl}}" class="btn btn-primary">{{settings.aboutButton}}</a>
           </div>
         </div>
       </div>

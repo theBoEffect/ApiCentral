@@ -9,8 +9,12 @@ import {environment} from "../../environments/environment";
 })
 export class LandingComponent implements OnInit {
   public settings:any = environment.setting;
+  public aboutUrl:any = this.settings.aboutCompanyUrl;
+  public aboutInternal:boolean = false;
   public contactForm: FormGroup;
-  constructor() { }
+  constructor() {
+    if(!this.aboutUrl.includes('http')) this.aboutInternal = true;
+  }
 
   ngOnInit(): void {
   }
