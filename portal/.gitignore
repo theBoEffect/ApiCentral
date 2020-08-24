@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 
 settings.json
+/src/index.html
