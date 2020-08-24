@@ -35,13 +35,15 @@ export class ApiPageComponent implements OnInit, AfterViewInit {
       await Redoc.init(this.spec, {
         scrollYOffset: 50
       }, document.getElementById('redoc-container'), () => {
-        console.info('after');
-        const elements = document.querySelectorAll<HTMLElement>('div.sc-qYSYK.cfUfoh.menu-content');
-        console.info(elements[0]);
-        elements[0].setAttribute("class", "sc-qYSYK cfUfoh menu-content fix-redoc")
+        const checkExist = setInterval(() => {
+          const elements = document.querySelectorAll<HTMLElement>('div.menu-content');
+          if (elements.length > 0) {
+            console.info('fixing redoc...');
+            elements[0].setAttribute("class", `${elements[0].classList.value} fix-redoc`);
+            clearInterval(checkExist);
+          }
+        }, 100);
       });
-
-
     } catch (error) {
       console.error(error);
     }
