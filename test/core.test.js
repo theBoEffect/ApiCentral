@@ -76,16 +76,18 @@ describe('Middleware tests', () => {
         }
     });
 
+
     test('make sure catch404 middleware redirects to home on all routes except api', async () => {
         try {
-            const req = {}, res = { redirect: jest.fn(), sendStatus: jest.fn(), header: jest.fn() }, next = jest.fn();
+            const req = {}, res = { sendFile: jest.fn(), sendStatus: jest.fn(), header: jest.fn() }, next = jest.fn();
             await m.catch404(req, res, next);
-            expect(res.redirect).toHaveBeenCalledWith('/');
+            expect(res.sendFile).toHaveBeenCalledWith("index.html", {"root": "./public/portal"});
         } catch (error) {
             console.info(error);
             fail(error);
         }
     });
+
 
     test('make sure catchError response works', async () => {
         try {

@@ -17,9 +17,13 @@ export default {
         // Since this serves both API and UI, we want to make sure UI redirects to root on unknown requests while api returns 404
         if (req.path) {
             const pathParts = req.path.split('/');
-            if(pathParts[1]==='api') return next(handleErrors.catch404());
+            console.info(pathParts);
+            if(pathParts[1]==='api') {
+                return next(handleErrors.catch404());
+            }
         }
-        return res.redirect('/');
+
+        return res.sendFile('index.html', { root: `./public/portal` });
     },
     async catchErrors (err, req, res, next) {
         try {
