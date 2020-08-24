@@ -142,11 +142,7 @@ Since this is a single tenant solution (one instance per organization requiring 
   "allowRegister": true,
   "protocol": "http",
   "service": "localhost:3000",
-  "metaData": {
-    "siteUrl": "http://localhost:3000",
-    "siteName": "Developer Portal",
-    "image": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
-  }
+  "siteImage": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
 }
 ```
 
