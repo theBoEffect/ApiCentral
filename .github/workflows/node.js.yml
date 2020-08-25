@@ -27,9 +27,9 @@ jobs:
     - run: yarn
     - run: yarn run settings
     - name: Build Angular
-      working-directory: ./app/portal
+      working-directory: ./portal
       run: yarn
     - run: yarn build --production
     - name: Test Service
-      working-directory: ./app
+      working-directory: ./
       run: yarn test
