@@ -2,3 +2,7 @@
   top: 90px !important;
   height: calc(100vh - 50px);
 }
+.page-header.page-header-extra-small {
+  min-height: 16vh;
+  max-height: 200px;
+}

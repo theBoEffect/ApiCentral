@@ -5805,6 +5805,11 @@ normalize-url@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
+now-ui-kit@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/now-ui-kit/-/now-ui-kit-1.3.0.tgz#bf98581989dc23cd17122497f8cfa072ebcfc245"
+  integrity sha512-lANWkphIZDtAmhS92S4EVXCiz1Eez1Hh8t9lRdMEPrekxJ29TAN+gFOCXe6W24gqifhAnME/Vt7nUsdqVRhqdw==
+
 npm-bundled@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.1.1.tgz#1edd570865a94cdb1bc8220775e29466c9fb234b"

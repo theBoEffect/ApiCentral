@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node ./build-index.js ng serve",
+    "start": "node ./build-index.js && ng serve",
     "build": "node ./build-index.js && ng build",
     "test": "node ./build-index.js ng test",
     "lint": "node ./build-index.js ng lint",
@@ -23,6 +23,7 @@
     "@angular/router": "~10.0.9",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "bootstrap": "^4.5.0",
+    "now-ui-kit": "^1.3.0",
     "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

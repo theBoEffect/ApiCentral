@@ -2,3 +2,8 @@
   max-width: 250px;
   max-height: 100px;
 }
+
+.page-header.page-header-extra-small {
+  min-height: 16vh;
+  max-height: 200px;
+}
