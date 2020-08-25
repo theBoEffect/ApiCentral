@@ -151,7 +151,6 @@ Since this is a single tenant solution (one instance per organization requiring 
 
 ## TODO
 
-* move some assets to node-modules
 * Deployment instructions for docker and lambda
 
 ## Roadmap
