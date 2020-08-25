@@ -17,8 +17,7 @@ describe('API tests', () => {
                 .get('/api/xyz');
             expect(res.statusCode).toEqual(404);
         } catch (error) {
-            console.error(error);
-            fail();
+            fail(error);
         }
 
     });
@@ -36,8 +35,7 @@ describe('API tests', () => {
             expect(res.statusCode).toEqual(200);
             expect(res.body).toStrictEqual(swag);
         } catch (error) {
-            console.error(error);
-            fail();
+            fail(error);
         }
     });
 
@@ -48,8 +46,7 @@ describe('API tests', () => {
             expect(res.statusCode).toEqual(200);
             expect(res.body).toStrictEqual({data: {server: 'running'}});
         } catch (error) {
-            console.error(error);
-            fail();
+            fail(error);
         }
     });
 
@@ -69,8 +66,7 @@ describe('API tests', () => {
                 }
             });
         } catch (error) {
-            console.error(error);
-            fail();
+            fail(error);
         }
     });
 });

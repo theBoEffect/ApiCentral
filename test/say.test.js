@@ -67,8 +67,7 @@ describe('Say library tests', () => {
                 expect(res.json).toHaveBeenCalledWith({ type: "TEST", data: { a: 'test' }});
             })
         } catch (error) {
-            console.error(error);
-            fail();
+            fail(error);
         }
 
     })
