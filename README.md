@@ -2,6 +2,8 @@
 
 This project allows you to register openAPI specs that are hosted in other services. The application persists these and then makes them available in an aggregated portal as a Development Portal.
 
+![CI](https://github.com/theBoEffect/ApiCentral/workflows/Node.js%20CI/badge.svg?branch=master)
+
 ## Example Deployment - Served via AWS Lambda
 
 [Mail My Voice API](https://api.mailmyvoice.com)
