@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -26,8 +26,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn run settings
-    - run: cd ./portal
+    - run:
+        working-directory: ./portal
     - run: yarn
     - run: yarn build --production
-    - run: cd ..  
+    - run:
+        working-directory: ./
     - run: yarn test
