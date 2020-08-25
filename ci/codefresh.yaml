@@ -1,6 +1,8 @@
 version: "1.0"
 stages:
   - "clone"
+  - "settings"
+  - "build"
   - "test"
 
 steps:
@@ -12,15 +14,27 @@ steps:
     git: "github"
     stage: "clone"
 
-  test:
+  settings:
     image: jch254/docker-node-serverless
-    title: Build and Test Service
+    title: Build Settings
     working_directory: "${{clone}}"
     commands:
       - yarn
       - yarn run settings
-      - cd ./portal
+
+  build:
+    image: jch254/docker-node-serverless
+    title: Build Angular
+    working_directory: "${{clone}}/portal"
+    commands:
       - yarn
-      - yarn build
-      - cd ..
+      - yarn build --prod
+      - echo build done
+
+  test:
+    image: jch254/docker-node-serverless
+    title: Test Service
+    working_directory: "${{clone}}"
+    commands:
+      - echo starting test
       - yarn test
