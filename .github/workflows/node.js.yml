@@ -26,10 +26,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn run settings
-    - name: Build Angular
+    - name: Install Angular
       working-directory: ./portal
       run: yarn
-    - run: yarn build --production
+    - name: Build Angular
+      working-directory: ./portal
+      run: yarn build --prod
     - name: Test Service
       working-directory: ./
       run: yarn test
