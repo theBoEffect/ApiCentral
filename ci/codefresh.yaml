@@ -7,7 +7,7 @@ steps:
   clone:
     title: "Cloning repository"
     type: "git-clone"
-    repo: "theBoEffect/boilerplate"
+    repo: "theBoEffect/ApiCentral"
     revision: "${{CF_BRANCH}}"
     git: "github"
     stage: "clone"
@@ -18,6 +18,9 @@ steps:
     working_directory: "${{clone}}"
     commands:
       - yarn
-      - yarn run build-ui
+      - yarn run settings
+      - cd ./portal
+      - yarn
+      - yarn build
+      - cd ..
       - yarn test
-      - yarn run test-ui

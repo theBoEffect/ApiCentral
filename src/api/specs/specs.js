@@ -9,7 +9,7 @@ export default {
         try {
             const check = await axios.get(data.apiSpecJsonUri);
             if (!check.data) throw 0;
-            if (!check.data.openapi) throw 0;
+            if (!check.data.openapi && !check.data.swagger) throw 0;
         } catch (error) {
             throw Boom.expectationFailed('the OpenAPI URI did not point to a valid OpenAPI specification');
         }
