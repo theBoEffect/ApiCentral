@@ -134,18 +134,7 @@ http://jsonpatch.com/
 * yarn run dev
 * http://localhost:3000
 
-## Getting Started With the UI
-
-* Register as a user from the login page
-* Login
-* Add Swagger spec references from the Admin page
-* You may want to go back and set settings.allowRegister to false after this initial setup so that people can't register as admin users on their own. This will require a restart/redeploy
-
-### Access
-
-The api allows local admins to register by default (settings.allowRegister = true). You'll want to set that to false before deploying publicly once you've set up the desired admin accounts. In the future, an OIDC integration will make access possible at scale for an org.
-
-## UI
+## UI Development
 
 The UI its own embedded SPA project that simply builds to the parent public folder. This way it can easily be worked on separately or pulled out entirely. It is an angular 10 project under the /portal file. To develop or modify the UI do the following:
 
@@ -220,6 +209,16 @@ Since this is a single tenant solution (one instance per organization requiring 
   "siteImage": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
 }
 ```
+## Getting Started With the UI
+
+* Register as a user from the login page
+* Login
+* Add Swagger spec references from the Admin page
+* You may want to go back and set settings.allowRegister to false after this initial setup so that people can't register as admin users on their own. This will require a restart/redeploy
+
+### Access
+
+The api allows local admins to register by default (settings.allowRegister = true). You'll want to set that to false before deploying publicly once you've set up the desired admin accounts. In the future, an OIDC integration will make access possible at scale for an org.
 
 ## Cool Ideas for Later (Help is Welcome)
 
