@@ -90,7 +90,8 @@ You can deploy to lambda manually as well. Assuming you have serverless framewor
 * cp ./.env-ci ./.env
 * update settings.json
 * update .env/env.production.json
-* yarn run deploy
+* SLS_ENV=production yarn run deploy
+    * This tells serverless to use the values defined in env.production.json as the env variables
 
 ## CI
 
