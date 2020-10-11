@@ -109,7 +109,7 @@ http://jsonpatch.com/
 
 ## Local Development
 
-### Docker
+### Docker Compose
 
 * Clone the project
 * cp ./settings-default.json ./settings.json
