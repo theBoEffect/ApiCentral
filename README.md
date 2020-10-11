@@ -1,21 +1,102 @@
 # Open API Aggregation and Dev Portal Generator
 
-This project allows you to register openAPI specs that are hosted in other services. The application persists these and then makes them available in an aggregated portal as a Development Portal.
+This project allows you to register openAPI specs that are hosted in other services to a single accessible service and UI. The application persists these in a Mongo database and then makes them available in an aggregated portal for reference. This is designed as a quick and easy solution in the absence of an Enterprise API Gateway with a built-in mesh and dev portal. It's also useful as an in-network mechanism to organize all distributed APIs into a single queryable interface for developers. Future enhancements could allow data to be aggregated automatically through utilization of a mesh system like Istio, Consul, etc. Additions to the code are welcome - feel free to submit a pull request.
 
 ![CI](https://github.com/theBoEffect/ApiCentral/workflows/Node.js%20CI/badge.svg)
 
-## Example Deployment - Served via AWS Lambda
+## Persistence
+
+I chose Mongo as the database because I happen to have a cluster that I maintain, and the boilerplate I built and generally use ([see it here](https://github.com/theBoEffect/boilerplate)) has it already configured. That said, other options may be more suitable for this kind of data, and the code can easily be modified to use them. Specifically, a managed pay-as-you-go service (DynamoDB for example) would seem to be ideal, especially since this the project can be served via Lambda.
+
+### Change DB
+
+If you do decide to use a different database or ODM, the following modifications are necessary:
+
+* change connection.js to the appropriate DB
+* validate that /src/slsapp.js and /src/start.js both correctly implement connection.js
+* in each of your api/resources, change the dal.js file to access the new DB using the new ODM/ORM
+
+## Deployments
+
+This project can be deployed to a traditional server, a Docker container (and subsequent orchestration system), or as a lambda function. The example deployment uses AWS Lambda. Additionally, this project is a mono-repo of the backend and frontend; however, the UI is an Angular 10 single spa application that could easily be deployed separately though a CDN if desired (though this would require a little modification to the code). Feel free to fork and play around.
+
+### Example Deployment - Served via AWS Lambda
 
 [Mail My Voice API](https://api.mailmyvoice.com)
 
+### Docker
+
+This repo does not pre-build a docker image for you. You'll want to build your own and store it in a container registry. From there its just a matter of running your image as a container. Here are the things to keep in mind:
+
+* When you build your image, you'll want to define a /settings.json file that you inject into the container. The best way to do this will be to have a base image in your registry of this repo and then use that as part of a FROM command in a new dockerfile where you pull in a locally defined settings.json file into a new container which you will then run.
+* When you go to run your docker image, make sure you're accounting for the required environment variables defined that correspond to those shown in /.env-ci/env.production.json.
+    * "NODE_ENV"
+        * i.e. production, qa, dev, etc.
+    * "PROTOCOL"
+        * i.e. http, https
+    * "MONGO"
+        * i.e. mongodb://mongodomain.com:27017/your-db
+    * "SWAGGER"
+        * i.e. your.domain.com
+    * "REPLICA"
+        * If your mongo is a replica set, name it here. Otherwise, ignore.
+    * "PERSIST_HTTP_ERRORS"
+        * True or False. Generally leave this false unless you're trying to debug specific http requests that are failing, and you can't view them clearly during runtime.
+    * "WRITE_LOGS_TO_DB":
+        * True or False. Generally leave this false unless you don't have anything scraping and storing logs like CloudWatch.
+        
+#### Local Docker Build
+
+You can also build it locally (rather than through CI) and push the image to your orchestration system manually.
+
+* Clone the project
+* cp ./settings-default.json ./settings.json
+* update settings
+* docker build -t username/apicentral .
+
+### Lambda
+
+Lambda deployment is possible directly from the repo through serverless framework. Review the /serverless.yaml file for details of what happens.
+
+* Assumptions
+    * You have an aws account with appropriate permissions
+    * You have serverless framework installed with appropriate access to your aws account
+    * CI tooling is used
+* You'll want to ensure you can include a custom /settings.json copied and modified from /settings-default.json
+* Ensure your tooling is setting the following environment variables
+    * "NODE_ENV"
+        * i.e. production, qa, dev, etc.
+    * "PROTOCOL"
+        * i.e. http, https
+    * "MONGO"
+        * i.e. mongodb://mongodomain.com:27017/your-db
+    * "SWAGGER"
+        * i.e. your.domain.com
+    * "REPLICA"
+        * If your mongo is a replica set, name it here. Otherwise, ignore.
+    * "PERSIST_HTTP_ERRORS"
+        * True or False. Generally leave this false unless you're trying to debug specific http requests that are failing, and you can't view them clearly during runtime.
+    * "WRITE_LOGS_TO_DB":
+        * True or False. Generally leave this false unless you don't have anything scraping and storing logs like CloudWatch.
+* From here you just need to run to following command through your tooling
+    * yarn run deploy
+
+#### Local Lambda Deploy
+
+You can deploy to lambda manually as well. Assuming you have serverless framework installed and configured:
+
+* Clone the project
+* cp ./settings-default.json ./settings.json
+* cp ./.env-ci ./.env
+* update settings.json
+* update .env/env.production.json
+* yarn run deploy
+
 ## CI
 
-will be added soon!
+For continuous integration I've started things off with two possibilities: GitHub Actions (which you can see the status of above) or if you prefer, I have a starter Code Fresh config as well under /ci. The repo status will rely on GitHub Actions and runs the defined service tests. Neither of these include the deployment requirements included above. I'll leave that to you to customize.
 
-#### follow me:
-* [twitter](https://twitter.com/theboeffect)
-* [linkedIn](https://www.linkedin.com/in/bmotlagh/)
-* [instagram](https://www.instagram.com/theboeffect/)
+## Query and Update Patterns
 
 ### oData Spec
 
@@ -25,15 +106,7 @@ https://www.odata.org/documentation/
 
 http://jsonpatch.com/
 
-### DB
-
-If you'd rather use a different database or ODM, the following modifications are necessary:
-
-* change connection.js to the appropriate DB
-* validate that slsapp and start both correctly implement connection.js
-* in each of your api/resources, change the dal.js file to access the new DB using the new ODM/ORM
-
-## Local Build
+## Local Development
 
 ### Docker
 
@@ -47,20 +120,20 @@ If you'd rather use a different database or ODM, the following modifications are
     * If you have cached containers or dangling images messing up the build you can use "docker system prune"
     * If you want to delete all docker images not running its "docker system prune -a"
 
-### Manual
+
+### Run Local Node
 
 * Clone the project
 * Somewhere on your system run: docker run -p 27017:27017 mongo
 * yarn
 * yarn run settings
 * Update ./settings.json with your site settings
-* yarn test (optional)
-* yarn run test-ui (optional)
+* yarn test
 * yarn run build-ui
 * yarn run dev
 * http://localhost:3000
 
-## Getting Started
+## Getting Started With the UI
 
 * Register as a user from the login page
 * Login
@@ -70,7 +143,6 @@ If you'd rather use a different database or ODM, the following modifications are
 ### Access
 
 The api allows local admins to register by default (settings.allowRegister = true). You'll want to set that to false before deploying publicly once you've set up the desired admin accounts. In the future, an OIDC integration will make access possible at scale for an org.
-
 
 ## UI
 
@@ -87,7 +159,7 @@ From here all the normal angular commands would apply (i.e. ng). When you're rea
 
 ## Site Settings
 
-Since this is a single tenant solution (one instance per organization requiring a portal), settings such as the company name, logo, and html meta data are defined in a static json file at the root of the project (./settings.json). This file is generated when you run "yarn run settings" from ./settings-default.json'. The UI is a complete SPA unto itself under the portal directory and expects its own default copy of this file, which is also created when you run "yarn run settings". When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately. These files are ignored by git so you can make your customizations easily.
+Since this is a single tenant solution (one instance per organization requiring a portal), settings such as the company name, logo, and html metadata are defined in a static json file at the root of the project (./settings.json). This file is generated when you run "yarn run settings" from ./settings-default.json'. The UI is a complete SPA unto itself under the portal directory and expects its own default copy of this file, which is also created when you run "yarn run settings". When you follow the build instructions below, those settings are carried over to the portal project, so you only ever need to update the root ./settings.json file. In this way, if the solution is ever broken into two repos, you can decouple these and maintain settings separately. These files are ignored by git so you can make your customizations easily.
 
 ```
 {
@@ -148,22 +220,20 @@ Since this is a single tenant solution (one instance per organization requiring 
 }
 ```
 
+## Cool Ideas for Later (Help is Welcome)
 
-## TODO
+* OIDC Integration
+* Mesh Integration
 
-* Deployment instructions for docker and lambda
-
-## Roadmap
-
-* OIDC integration
-* Istio integration
-
-## Credits
+## UX Credits
 
 * [now-ui-kit by creativetimoffical](https://github.com/creativetimofficial/now-ui-kit)
 * [ReDoc](https://github.com/Redocly/redoc)
 * [Formspree](https://formspree.io/)
 * [OpenAPI](https://swagger.io/)
 
-
+### follow me:
+* [twitter](https://twitter.com/theboeffect)
+* [linkedIn](https://www.linkedin.com/in/bmotlagh/)
+* [instagram](https://www.instagram.com/theboeffect/)
 
