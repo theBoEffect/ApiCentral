@@ -209,7 +209,7 @@ Since this is a single tenant solution (one instance per organization requiring 
   "siteImage": "https://cdn-images-1.medium.com/max/280/1*vuHoiLlmWjuTJ9zK98jFtQ@2x.png"
 }
 ```
-## Getting Started With the UI
+## Getting Started: Using the Interface
 
 * Register as a user from the login page
 * Login
