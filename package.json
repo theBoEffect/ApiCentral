@@ -44,7 +44,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.9.4",
     "morgan": "^1.9.1",
-    "node-forge": "^0.10.0",
+    "node-forge": "^1.3.0",
     "object-path": "^0.11.8",
     "odata-v4-mongodb": "^0.1.12",
     "passport": "^0.4.1",
